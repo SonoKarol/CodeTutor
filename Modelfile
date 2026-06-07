@@ -1,0 +1,33 @@
+# Modelfile per Qwen3.5-9B (GGUF)
+# Crea il modello con:   ollama create qwen3.5-9b-custom -f Modelfile
+# Eseguilo con:          ollama run qwen3.5-9b-custom
+#
+# IMPORTANTE: il file .gguf indicato in FROM deve trovarsi nella stessa
+# cartella di questo Modelfile (oppure usa un percorso assoluto).
+
+FROM ./Qwen3.5-9B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf
+
+# --- VISION (opzionale) -------------------------------------------------
+# Qwen3.5-9B e' MULTIMODALE (testo + immagini). Per abilitare la parte
+# vision serve anche il "projector" (mmproj). Scaricalo e decommenta:
+# FROM ./mmproj-F16.gguf
+# Nota: il wiring del projector via Modelfile e' delicato; se ti serve la
+# vision la strada piu' affidabile e' `ollama pull qwen3.5:9b` (vedi note).
+
+# --- TEMPLATE DI CHAT ---------------------------------------------------
+# Non lo specifico di proposito: i GGUF moderni contengono gia' il chat
+# template nei metadati e Ollama lo usa in automatico. Se vuoi vedere/forzare
+# quello ufficiale:   ollama show qwen3.5:9b --modelfile
+
+# --- PARAMETRI ----------------------------------------------------------
+# Valori tipici della famiglia Qwen3 (verifica/affina per il 3.5).
+PARAMETER temperature 0.7
+PARAMETER top_p 0.8
+PARAMETER top_k 20
+PARAMETER repeat_penalty 1.05
+# Finestra di contesto: piu' grande = risposte/conversazioni piu' lunghe, ma piu' RAM/VRAM.
+# (Qwen3.5 supporta fino a 262144. 32768 = ~24.000 parole tra input e output.)
+PARAMETER num_ctx 32768
+
+# --- SYSTEM PROMPT (opzionale) ------------------------------------------
+SYSTEM """Sei un assistente utile, preciso e conciso. Rispondi in italiano."""

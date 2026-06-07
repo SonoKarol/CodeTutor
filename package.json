@@ -1,0 +1,20 @@
+{
+  "name": "code-tutor-chatbot",
+  "version": "1.0.0",
+  "description": "Chatbot educativo che genera codice e lo spiega nel dettaglio per neofiti",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.101.0",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.2",
+    "express-rate-limit": "^8.5.2",
+    "geoip-lite": "^2.0.2",
+    "openai": "^6.42.0"
+  }
+}
